@@ -27,7 +27,7 @@ const pathname = usePathname();
         <SheetContent side='left' className='border-none bg-white'>
         <Link href='/' className="cursor-pointer flex items-center gap-1 px-4">
         <Image 
-          src='/icons/thermo.svg'
+             src='/icons/thermo.svg'
           width={34}
           height={34}
           alt='thermo logo'
