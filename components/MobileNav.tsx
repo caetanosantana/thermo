@@ -32,7 +32,7 @@ const pathname = usePathname();
           height={34}
           alt='thermo logo'
         />
-        <h1 className='text-26 font-ibm-plex-serif font-bold text-black-1'>Thermo</h1>
+        <h1 className='text-26 font-ibm-plex-serif font-bold text-black-2'>Thermo</h1>
         </Link>
         <div className="mobilenav-sheet">
             <SheetClose asChild>
@@ -43,7 +43,7 @@ const pathname = usePathname();
                 return (
                   <SheetClose asChild key={item.route}>
                     <Link href={item.route} key={item.label}
-                      className={cn('mobilenav-sheet_close w-full', { 'bg-bank-gradient': isActive })}
+                      className={cn('mobilenav-sheet_close w-full', { 'bg-black-2': isActive })}
                     >
                         <Image 
                           src={item.imgURL}
