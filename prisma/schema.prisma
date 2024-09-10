@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Empresa {
+  id       String    @id @default(uuid())
+  nome     String
+  obras    Obra[]
+  Usuarios Usuario[]
+}
+
+model Obra {
+  id        String   @id @default(uuid())
+  nome      String
+  descricao String
+  empresa   Empresa  @relation(fields: [empresaId], references: [id])
+  empresaId String
+  sensores  Sensor[]
+}
+
+model Sensor {
+  id            String  @id @default(uuid())
+  nome          String
+  identificador String  @unique
+  obra          Obra    @relation(fields: [obraId], references: [id])
+  obraId        String
+  dados         Dados[]
+}
+
+model Dados {
+  id          String   @id @default(uuid())
+  temperatura Float
+  umidade     Float
+  timestamp   DateTime @default(now())
+  sensor      Sensor   @relation(fields: [sensorId], references: [id])
+  sensorId    String
+}
+
+model Usuario {
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  senha     String // Senha hasheada para segurança
+  empresa   Empresa? @relation(fields: [empresaId], references: [id]) // (Opcional) Um usuário pode estar associado a uma empresa
+  empresaId String?
+}
